@@ -1,0 +1,20 @@
+service: image-reader-api
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'api'}
+  environment:
+    BASE_URL: http://localhost:3000
+
+functions:
+  purchaseSpecification:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-offline
